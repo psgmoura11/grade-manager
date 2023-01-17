@@ -5,10 +5,7 @@ public class SchoolClass {
 
     @Override
     public String toString() {
-        return "SchoolClass{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+      return this.name + "," + this.description;
     }
 
     public SchoolClass(String name, String description) {
