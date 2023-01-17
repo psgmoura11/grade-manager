@@ -28,14 +28,16 @@ public class App {
           final var getUserResponse = scanner.nextLine();
           switch (getUserResponse) {
               case "1":
-                  System.out.println("Adding a new Class");
-                  System.out.println("Class name:");
-                  String UserClass = scanner.nextLine();
-                  System.out.println("Description:");
-                  String UserClassDescription = scanner.nextLine();
-                  System.out.println("You've created a new class called " + "\""
-                          + UserClass + " " + UserClassDescription + "\" \n");
-                  break;
+              System.out.println("Adding a new Class");
+              System.out.println("Class name:");
+              String name = scanner.nextLine();
+              System.out.println("Description:");
+              String description = scanner.nextLine();
+              SchoolClass schoolClass = new SchoolClass(name, description);
+              CsvHandler.writeToSchoolClassesCsv(schoolClass);
+              System.out.println("You've created a new class called " + "\""
+                      + name + " " + description + "\" \n");
+              break;
               case "2":
                   System.out.println("What class do you want to manage?");
                   break;
