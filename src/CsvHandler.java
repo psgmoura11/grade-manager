@@ -16,7 +16,7 @@ public class CsvHandler {
     }
 
     public List<SchoolClass> getSchoolClasses() throws FileNotFoundException {
-        var records = this.readSchoolClasses();
+       List<String> records = this.readSchoolClasses();
         // o metodo esta a ler a lista de arrays
         List<SchoolClass> schoolClasses = new ArrayList<>();
         // cria uma nova lista vazia de arrays
