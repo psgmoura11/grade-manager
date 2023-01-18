@@ -1,14 +1,13 @@
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws FileNotFoundException {
         App app = new App();
         app.init();
     }
 
-    private void init() throws IOException {
+    private void init() throws FileNotFoundException {
       Scanner scanner = new Scanner(System.in);
       System.out.println("Welcome to the mega GradeManager 3000!\n" + "To use this manager you need to login:");
       String username;
@@ -26,7 +25,7 @@ public class App {
           System.out.println("1. Add a new Class");
           System.out.println("2. Manage a class");
           System.out.println("3. Exit");
-          String getUserResponse = scanner.nextLine();
+          final var getUserResponse = scanner.nextLine();
           switch (getUserResponse) {
               case "1":
               System.out.println("Adding a new Class");
@@ -41,9 +40,6 @@ public class App {
               break;
               case "2":
                   System.out.println("What class do you want to manage?");
-                  CsvHandler csvhandler = new CsvHandler();
-                  String list = csvhandler.getSchoolClasses().toString();
-                  System.out.println(list);
                   break;
               case "3":
                   System.out.println("Quiting \n");
