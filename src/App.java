@@ -47,7 +47,12 @@ public class App {
               case "3":
                   CsvHandler csvList = new CsvHandler();
                   List<SchoolClass> allClassesList = csvList.getSchoolClasses();
-                  System.out.println(allClassesList);
+                  // String newline = System.lineSeparator();
+                  for (SchoolClass classList : allClassesList) {
+                      int index = allClassesList.indexOf(classList);
+                      String listName = classList.getName();
+                      System.out.println((index+1) + "." + listName);
+                  }
                   break;
               case "4":
                   System.out.println("Quiting \n");
