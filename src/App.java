@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -25,7 +26,8 @@ public class App {
           System.out.println("What do you need to do?");
           System.out.println("1. Add a new Class");
           System.out.println("2. Manage a class");
-          System.out.println("3. Exit");
+          System.out.println("3. List all Classes");
+          System.out.println("4. Exit");
           String getUserResponse = scanner.nextLine();
           switch (getUserResponse) {
               case "1":
@@ -43,6 +45,11 @@ public class App {
                   System.out.println("What class do you want to manage?");
                   break;
               case "3":
+                  CsvHandler csvList = new CsvHandler();
+                  List<SchoolClass> allClassesList = csvList.getSchoolClasses();
+                  System.out.println(allClassesList);
+                  break;
+              case "4":
                   System.out.println("Quiting \n");
                   System.exit(0);
               default:
