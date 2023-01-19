@@ -11,7 +11,7 @@ public class App {
 
     private void init() throws IOException {
       Scanner scanner = new Scanner(System.in);
-      System.out.println("Welcome to the mega GradeManager 3000!\n" + "To use this manager you need to login:");
+       /* System.out.println("Welcome to the mega GradeManager 3000!\n" + "To use this manager you need to login:");
       String username;
       String password;
       boolean userCredentials = false;
@@ -21,7 +21,7 @@ public class App {
           System.out.println("Password:");
           password = scanner.nextLine();
           userCredentials = Professor.authenticate(username, password);
-      }
+      }*/
       while (true) {
           System.out.println("What do you need to do?");
           System.out.println("1. Add a new Class");
@@ -47,12 +47,15 @@ public class App {
               case "3":
                   CsvHandler csvList = new CsvHandler();
                   List<SchoolClass> allClassesList = csvList.getSchoolClasses();
-                  // String newline = System.lineSeparator();
                   for (SchoolClass classList : allClassesList) {
                       int index = allClassesList.indexOf(classList);
                       String listName = classList.getName();
                       System.out.println((index+1) + "." + listName);
+                     // String backVariable = scanner.nextLine();
                   }
+                  int lastIndex = allClassesList.size() + 1;
+                  SchoolClass lastSchoolClass = allClassesList.get(lastIndex);
+                  System.out.println(lastSchoolClass + ".Back");
                   break;
               case "4":
                   System.out.println("Quiting \n");
