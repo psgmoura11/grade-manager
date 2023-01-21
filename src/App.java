@@ -31,6 +31,9 @@ public class App {
                   break;
               case "2":
                   System.out.println("What class do you want to manage?");
+                  getCsvClassesList();
+                  managingClassMenu();
+                  //classManageMenu(selectedClass);
                   break;
               case "3":
                   getCsvClassesList();
@@ -54,6 +57,7 @@ public class App {
      }
     private static void backMenu() {
         System.out.println("5- back");
+        // fala buscar o index
         Scanner scanner = new Scanner(System.in);
         int userChoice = scanner.nextInt();
         switch (userChoice) {
@@ -83,5 +87,21 @@ public class App {
           String listName = classList.getName();
           System.out.println((index+1) + "." + listName);
       }
+  }
+  private static void managingClassMenu() throws FileNotFoundException {
+      Scanner scanner = new Scanner(System.in);
+      int userSelection = scanner.nextInt();
+      CsvHandler csvList = new CsvHandler();
+      List<SchoolClass> allClassesList = csvList.getSchoolClasses();
+      if (userSelection > 0 && userSelection <= allClassesList.size()) {
+          SchoolClass selectedClass = allClassesList.get(userSelection - 1);
+          System.out.println("You have selected: " + selectedClass);
+      } else {
+          System.out.println("Invalid selection, please try again.");
+      }
+  }
+  private  static void classManageMenu(SchoolClass selectedClass){
+
+        System.out.println(selectedClass);
   }
 }
