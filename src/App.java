@@ -35,7 +35,6 @@ public class App {
               case "3":
                   getCsvClassesList();
                   backMenu();
-                  int userBackAnswer = Integer.parseInt(scanner.nextLine());
                   break;
               case "4":
                   System.out.println("Quiting \n");
@@ -45,31 +44,36 @@ public class App {
           }
       }
   }
-    private static void backMenu() {
-      System.out.println("5- Back");
-      Scanner scanner = new Scanner(System.in);
-      int userChoice = scanner.nextInt();
-  }
 
-  private static void startMenu() {
-      System.out.println("What do you need to do?");
-      System.out.println("1. Add a new Class");
-      System.out.println("2. Manage a class");
-      System.out.println("3. List all Classes");
-      System.out.println("4. Exit");
-  }
-  private static void userAddClass() throws IOException {
-      Scanner scanner = new Scanner(System.in);
-      System.out.println("Adding a new Class");
-      System.out.println("Class name:");
-      String name = scanner.nextLine();
-      System.out.println("Description:");
-      String description = scanner.nextLine();
-      SchoolClass schoolClass = new SchoolClass(name, description);
-      CsvHandler.writeToSchoolClassesCsv(schoolClass);
-      System.out.println("You've created a new class called " + "\""
+     private static void startMenu() {
+          System.out.println("What do you need to do?");
+          System.out.println("1. Add a new Class");
+          System.out.println("2. Manage a class");
+          System.out.println("3. List all Classes");
+          System.out.println("4. Exit");
+     }
+    private static void backMenu() {
+        System.out.println("5- back");
+        Scanner scanner = new Scanner(System.in);
+        int userChoice = scanner.nextInt();
+        switch (userChoice) {
+            case 5:
+                startMenu();
+                break;
+        }
+    }
+    private static void userAddClass() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Adding a new Class");
+        System.out.println("Class name:");
+        String name = scanner.nextLine();
+        System.out.println("Description:");
+        String description = scanner.nextLine();
+        SchoolClass schoolClass = new SchoolClass(name, description);
+        CsvHandler.writeToSchoolClassesCsv(schoolClass);
+        System.out.println("You've created a new class called " + "\""
               + name + " " + description + "\" \n");
-  }
+    }
 
   private static void getCsvClassesList() throws FileNotFoundException {
       CsvHandler csvList = new CsvHandler();
