@@ -23,39 +23,19 @@ public class App {
           userCredentials = Professor.authenticate(username, password);
       }*/
       while (true) {
-          System.out.println("What do you need to do?");
-          System.out.println("1. Add a new Class");
-          System.out.println("2. Manage a class");
-          System.out.println("3. List all Classes");
-          System.out.println("4. Exit");
+          startMenu();
           String getUserResponse = scanner.nextLine();
           switch (getUserResponse) {
               case "1":
-              System.out.println("Adding a new Class");
-              System.out.println("Class name:");
-              String name = scanner.nextLine();
-              System.out.println("Description:");
-              String description = scanner.nextLine();
-              SchoolClass schoolClass = new SchoolClass(name, description);
-              CsvHandler.writeToSchoolClassesCsv(schoolClass);
-              System.out.println("You've created a new class called " + "\""
-                      + name + " " + description + "\" \n");
-              break;
+                  userAddClass();
+                  break;
               case "2":
                   System.out.println("What class do you want to manage?");
                   break;
               case "3":
-                  CsvHandler csvList = new CsvHandler();
-                  List<SchoolClass> allClassesList = csvList.getSchoolClasses();
-                  for (SchoolClass classList : allClassesList) {
-                      int index = allClassesList.indexOf(classList);
-                      String listName = classList.getName();
-                      System.out.println((index+1) + "." + listName);
-                     // String backVariable = scanner.nextLine();
-                  }
-                  int lastIndex = allClassesList.size() + 1;
-                  SchoolClass lastSchoolClass = allClassesList.get(lastIndex);
-                  System.out.println(lastSchoolClass + ".Back");
+                  getCsvClassesList();
+                  backMenu();
+                  int userBackAnswer = Integer.parseInt(scanner.nextLine());
                   break;
               case "4":
                   System.out.println("Quiting \n");
@@ -63,6 +43,41 @@ public class App {
               default:
                   System.out.println("Invalid command, try again!");
           }
+      }
+  }
+    private static void backMenu() {
+      System.out.println("5- Back");
+      Scanner scanner = new Scanner(System.in);
+      int userChoice = scanner.nextInt();
+  }
+
+  private static void startMenu() {
+      System.out.println("What do you need to do?");
+      System.out.println("1. Add a new Class");
+      System.out.println("2. Manage a class");
+      System.out.println("3. List all Classes");
+      System.out.println("4. Exit");
+  }
+  private static void userAddClass() throws IOException {
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("Adding a new Class");
+      System.out.println("Class name:");
+      String name = scanner.nextLine();
+      System.out.println("Description:");
+      String description = scanner.nextLine();
+      SchoolClass schoolClass = new SchoolClass(name, description);
+      CsvHandler.writeToSchoolClassesCsv(schoolClass);
+      System.out.println("You've created a new class called " + "\""
+              + name + " " + description + "\" \n");
+  }
+
+  private static void getCsvClassesList() throws FileNotFoundException {
+      CsvHandler csvList = new CsvHandler();
+      List<SchoolClass> allClassesList = csvList.getSchoolClasses();
+      for (SchoolClass classList : allClassesList) {
+          int index = allClassesList.indexOf(classList);
+          String listName = classList.getName();
+          System.out.println((index+1) + "." + listName);
       }
   }
 }
