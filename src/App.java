@@ -33,6 +33,7 @@ public class App {
                   System.out.println("What class do you want to manage?");
                   getCsvClassesList();
                   classManageMenu();
+                  Alumni.addAlumni();
                   break;
               case "3":
                   getCsvClassesList();
@@ -56,7 +57,7 @@ public class App {
      }
     private static void backMenu() {
         System.out.println("5- back");
-        // fala buscar o index
+        // falta buscar o index
         Scanner scanner = new Scanner(System.in);
         int userChoice = scanner.nextInt();
         switch (userChoice) {
@@ -99,17 +100,21 @@ public class App {
       }
       return null;
   }
-  private  static void classManageMenu() throws FileNotFoundException {
-        Scanner scanner = new Scanner(System.in);
-        String classSelected = String.valueOf(managingClassMenu());
-        System.out.println("What do you want to do to class: " + classSelected + "?");
-        System.out.println("1. Show alumni");
-        System.out.println("2. Add alumni");
-        System.out.println("3. Back");
-        int userChoice = scanner.nextInt();
-        /* switch (userChoice) {
-            case 1:
-
-        }*/
-  }
+      private  static void classManageMenu() throws IOException {
+            Scanner scanner = new Scanner(System.in);
+            String classSelected = String.valueOf(managingClassMenu());
+            System.out.println("What do you want to do to class: " + classSelected + "?");
+            System.out.println("1. Show alumni");
+            System.out.println("2. Add alumni");
+            System.out.println("3. Back");
+            int userChoice = scanner.nextInt();
+             switch (userChoice) {
+                case 1:
+                    Alumni.showAlumni();
+                    break;
+                case 2:
+                    Alumni.addAlumni();
+                    break;
+            }
+      }
 }
