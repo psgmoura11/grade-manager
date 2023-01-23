@@ -32,8 +32,7 @@ public class App {
               case "2":
                   System.out.println("What class do you want to manage?");
                   getCsvClassesList();
-                  managingClassMenu();
-                  //classManageMenu(selectedClass);
+                  classManageMenu();
                   break;
               case "3":
                   getCsvClassesList();
@@ -88,20 +87,29 @@ public class App {
           System.out.println((index+1) + "." + listName);
       }
   }
-  private static void managingClassMenu() throws FileNotFoundException {
+  private static SchoolClass managingClassMenu() throws FileNotFoundException {
       Scanner scanner = new Scanner(System.in);
       int userSelection = scanner.nextInt();
       CsvHandler csvList = new CsvHandler();
       List<SchoolClass> allClassesList = csvList.getSchoolClasses();
       if (userSelection > 0 && userSelection <= allClassesList.size()) {
-          SchoolClass selectedClass = allClassesList.get(userSelection - 1);
-          System.out.println("You have selected: " + selectedClass);
+          return allClassesList.get(userSelection - 1);
       } else {
           System.out.println("Invalid selection, please try again.");
       }
+      return null;
   }
-  private  static void classManageMenu(SchoolClass selectedClass){
+  private  static void classManageMenu() throws FileNotFoundException {
+        Scanner scanner = new Scanner(System.in);
+        String classSelected = String.valueOf(managingClassMenu());
+        System.out.println("What do you want to do to class: " + classSelected + "?");
+        System.out.println("1. Show alumni");
+        System.out.println("2. Add alumni");
+        System.out.println("3. Back");
+        int userChoice = scanner.nextInt();
+        /* switch (userChoice) {
+            case 1:
 
-        System.out.println(selectedClass);
+        }*/
   }
 }
