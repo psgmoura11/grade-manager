@@ -50,4 +50,39 @@ public class CsvHandler {
             // Se houver uma excepçao a ler o ficheiro , aparece a mensagem
         }
     }
+    // Alumni CSV
+    public static void writeToAlumni(Alumni alumni) throws IOException {
+        File csvOutputFile = new File("src/resources/Alumni.csv");
+        FileWriter fw = new FileWriter(csvOutputFile, true);
+        PrintWriter pw = new PrintWriter(fw);
+        pw.println(alumni);
+        pw.flush();
+        pw.close();
+    }
+
+    public List<Alumni> getAlumni() throws FileNotFoundException {
+        List<String> records = this.readAlumni();
+        List<Alumni> alumniList = new ArrayList<>();
+        for (String record : records) {
+            String[] recordSplit = record.split(",");
+            int age = Integer.parseInt(recordSplit[1]);
+            alumniList.add(new Alumni(recordSplit[0], age));
+        }
+        return alumniList;
+    }
+
+    private List<String> readAlumni() throws FileNotFoundException {
+        List<String> alumniRecords = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(new File("src/resources/Alumni.csv"));
+            scanner.nextLine();
+            while (scanner.hasNextLine()) {
+                alumniRecords.add(scanner.nextLine());
+            }
+            return alumniRecords;
+
+        } catch (Exception ex) {
+            throw new FileNotFoundException("no records found");
+        }
+    }
 }
