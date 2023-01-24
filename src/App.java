@@ -36,7 +36,7 @@ public class App {
                   switch (userChoice2) {
                       case 1:
                           System.out.println("Our Alumnis are: ");
-                          Alumni.showAlumni();
+                          Alumni.getAssociatedClass();
                           break;
                       case 2:
                           Alumni.addAlumni();
@@ -86,7 +86,7 @@ public class App {
           System.out.println((index+1) + "." + listName);
       }
   }
-  private static SchoolClass managingClassMenu() throws FileNotFoundException {
+  public static SchoolClass managingClassMenu() throws FileNotFoundException {
       Scanner scanner = new Scanner(System.in);
       int userSelection = scanner.nextInt();
       CsvHandler csvList = new CsvHandler();
