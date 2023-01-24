@@ -32,12 +32,21 @@ public class App {
               case "2":
                   System.out.println("What class do you want to manage?");
                   getCsvClassesList();
-                  classManageMenu();
-                  Alumni.addAlumni();
+                    int userChoice2 = classManageMenu();
+                  switch (userChoice2) {
+                      case 1:
+                          System.out.println("Our Alumnis are: ");
+                          Alumni.showAlumni();
+                          break;
+                      case 2:
+                          Alumni.addAlumni();
+                          break;
+                      case 3:
+                          break;
+                  }
                   break;
               case "3":
                   getCsvClassesList();
-                  backMenu();
                   break;
               case "4":
                   System.out.println("Quiting \n");
@@ -55,17 +64,6 @@ public class App {
           System.out.println("3. List all Classes");
           System.out.println("4. Exit");
      }
-    private static void backMenu() {
-        System.out.println("5- back");
-        // falta buscar o index
-        Scanner scanner = new Scanner(System.in);
-        int userChoice = scanner.nextInt();
-        switch (userChoice) {
-            case 5:
-                startMenu();
-                break;
-        }
-    }
     private static void userAddClass() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Adding a new Class");
@@ -100,7 +98,7 @@ public class App {
       }
       return null;
   }
-      private  static void classManageMenu() throws IOException {
+      private  static int classManageMenu() throws IOException {
             Scanner scanner = new Scanner(System.in);
             String classSelected = String.valueOf(managingClassMenu());
             System.out.println("What do you want to do to class: " + classSelected + "?");
@@ -108,13 +106,6 @@ public class App {
             System.out.println("2. Add alumni");
             System.out.println("3. Back");
             int userChoice = scanner.nextInt();
-             switch (userChoice) {
-                case 1:
-                    Alumni.showAlumni();
-                    break;
-                case 2:
-                    Alumni.addAlumni();
-                    break;
-            }
+            return userChoice;
       }
 }

@@ -50,8 +50,7 @@ public class Alumni {
             int index = allAlumnis.indexOf(alumniRecords);
             String name = alumniRecords.getName();
             int age = alumniRecords.getAge();
-            System.out.println("-" + name);
-            System.out.println("-" + age);
+            System.out.println("-" + name + ":" + age + "years old");
         }
 
     }
