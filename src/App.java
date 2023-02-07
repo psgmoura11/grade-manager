@@ -6,11 +6,15 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws IOException {
         App app = new App();
+        // SchoolClass new1 = new SchoolClass("escola","merda");
+        //Alumni alumni1 = new Alumni("Filipe", 28);
+        // alumni1.setAssociatedClass(new1);
+        //System.out.println(alumni1.getAssociatedClass());
         app.init();
     }
 
     private void init() throws IOException {
-      Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
        /* System.out.println("Welcome to the mega GradeManager 3000!\n" + "To use this manager you need to login:");
       String username;
       String password;
@@ -22,48 +26,65 @@ public class App {
           password = scanner.nextLine();
           userCredentials = Professor.authenticate(username, password);
       }*/
-      while (true) {
-          startMenu();
-          String getUserResponse = scanner.nextLine();
-          switch (getUserResponse) {
-              case "1":
-                  userAddClass();
-                  break;
-              case "2":
-                  System.out.println("What class do you want to manage?");
-                  getCsvClassesList();
-                    int userChoice2 = classManageMenu();
-                  switch (userChoice2) {
-                      case 1:
-                          System.out.println("Our Alumnis are: ");
-                          Alumni.getAssociatedClass();
-                          break;
-                      case 2:
-                          Alumni.addAlumni();
-                          break;
-                      case 3:
-                          break;
-                  }
-                  break;
-              case "3":
-                  getCsvClassesList();
-                  break;
-              case "4":
-                  System.out.println("Quiting \n");
-                  System.exit(0);
-              default:
-                  System.out.println("Invalid command, try again!");
-          }
-      }
-  }
+        String getUserResponse;
+        while (true) {
+            startMenu();
+            getUserResponse = scanner.nextLine();
+            switch (getUserResponse) {
+                case "1":
+                    userAddClass();
+                    break;
+                case "2":
+                    System.out.println("What class do you want to manage?");
+                    List<SchoolClass> schoolClasses = getCsvClassesList();
+                    for (SchoolClass classList : schoolClasses) {
+                        int index = schoolClasses.indexOf(classList);
+                        String listName = classList.getName();
+                        System.out.println((index) + "." + listName);
+                    }
+                    int schoolClassChoice = scanner.nextInt();
+                    SchoolClass schoolClassToOperate = schoolClasses.get(schoolClassChoice);
+                    classManageMenu(schoolClassToOperate);
+                    int schoolClassOperation = scanner.nextInt();
+                    switch (schoolClassOperation) {
+                        case 1:
+                            System.out.println("Our Alumnis are: ");
+                            for (Alumni alumni : schoolClassToOperate.getAlumniList()) {
+                                System.out.println(alumni.getName());
+                            }
+                            break;
+                        case 2:
+                            System.out.println("Alumni name");
+                            String alumniName = scanner.next();
+                            System.out.println("Alumni age");
+                            int alumniAge = scanner.nextInt();
+                            Alumni newAlumni = new Alumni(alumniName, alumniAge);
+                            schoolClassToOperate.addAlumni(newAlumni);
+                            break;
+                        case 3:
+                            break;
+                    }
+                    break;
+                case "3":
+                    getCsvClassesList();
+                    break;
+                case "4":
+                    System.out.println("Quiting \n");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid command, try again!");
+            }
+        }
+    }
 
-     private static void startMenu() {
-          System.out.println("What do you need to do?");
-          System.out.println("1. Add a new Class");
-          System.out.println("2. Manage a class");
-          System.out.println("3. List all Classes");
-          System.out.println("4. Exit");
-     }
+    private void startMenu() {
+        System.out.println("What do you need to do?");
+        System.out.println("1. Add a new Class");
+        System.out.println("2. Manage a class");
+        System.out.println("3. List all Classes");
+        System.out.println("4. Exit");
+    }
+
     private static void userAddClass() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Adding a new Class");
@@ -74,38 +95,21 @@ public class App {
         SchoolClass schoolClass = new SchoolClass(name, description);
         CsvHandler.writeToSchoolClassesCsv(schoolClass);
         System.out.println("You've created a new class called " + "\""
-              + name + " " + description + "\" \n");
+                + name + " " + description + "\" \n");
     }
 
-  private static void getCsvClassesList() throws FileNotFoundException {
-      CsvHandler csvList = new CsvHandler();
-      List<SchoolClass> allClassesList = csvList.getSchoolClasses();
-      for (SchoolClass classList : allClassesList) {
-          int index = allClassesList.indexOf(classList);
-          String listName = classList.getName();
-          System.out.println((index+1) + "." + listName);
-      }
-  }
-  public static SchoolClass managingClassMenu() throws FileNotFoundException {
-      Scanner scanner = new Scanner(System.in);
-      int userSelection = scanner.nextInt();
-      CsvHandler csvList = new CsvHandler();
-      List<SchoolClass> allClassesList = csvList.getSchoolClasses();
-      if (userSelection > 0 && userSelection <= allClassesList.size()) {
-          return allClassesList.get(userSelection - 1);
-      } else {
-          System.out.println("Invalid selection, please try again.");
-      }
-      return null;
-  }
-      private  static int classManageMenu() throws IOException {
-            Scanner scanner = new Scanner(System.in);
-            String classSelected = String.valueOf(managingClassMenu());
-            System.out.println("What do you want to do to class: " + classSelected + "?");
-            System.out.println("1. Show alumni");
-            System.out.println("2. Add alumni");
-            System.out.println("3. Back");
-            int userChoice = scanner.nextInt();
-            return userChoice;
-      }
+    private static List<SchoolClass> getCsvClassesList() throws FileNotFoundException {
+        CsvHandler csvList = new CsvHandler();
+        List<SchoolClass> allClassesList = csvList.getSchoolClasses();
+
+        return allClassesList;
+    }
+
+    public void classManageMenu(SchoolClass schoolClass) {
+        System.out.println("What do you want to do to class: " + schoolClass.getName() + "?");
+        System.out.println("1. Show alumni");
+        System.out.println("2. Add alumni");
+        System.out.println("3. Back");
+    }
+
 }
