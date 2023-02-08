@@ -43,9 +43,11 @@ public class App {
                         System.out.println((index) + "." + listName);
                     }
                     int schoolClassChoice = scanner.nextInt();
+                    scanner.nextLine();
                     SchoolClass schoolClassToOperate = schoolClasses.get(schoolClassChoice);
                     classManageMenu(schoolClassToOperate);
                     int schoolClassOperation = scanner.nextInt();
+                    scanner.nextLine();
                     switch (schoolClassOperation) {
                         case 1:
                             System.out.println("Our Alumnis are: ");
@@ -55,9 +57,10 @@ public class App {
                             break;
                         case 2:
                             System.out.println("Alumni name");
-                            String alumniName = scanner.next();
+                            String alumniName = scanner.nextLine();
                             System.out.println("Alumni age");
                             int alumniAge = scanner.nextInt();
+                            scanner.nextLine();
                             Alumni newAlumni = new Alumni(alumniName, alumniAge);
                             schoolClassToOperate.addAlumni(newAlumni);
                             break;
@@ -101,7 +104,6 @@ public class App {
     private static List<SchoolClass> getCsvClassesList() throws FileNotFoundException {
         CsvHandler csvList = new CsvHandler();
         List<SchoolClass> allClassesList = csvList.getSchoolClasses();
-
         return allClassesList;
     }
 
@@ -111,5 +113,4 @@ public class App {
         System.out.println("2. Add alumni");
         System.out.println("3. Back");
     }
-
 }
