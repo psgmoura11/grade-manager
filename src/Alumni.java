@@ -7,6 +7,7 @@ public class Alumni {
     private String name;
     private int age;
 
+    private SchoolClass schoolClass;
     @Override
     public String toString() {
         return this.name + "," + this.age;

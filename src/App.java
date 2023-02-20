@@ -6,10 +6,6 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws IOException {
         App app = new App();
-        // SchoolClass new1 = new SchoolClass("escola","merda");
-        //Alumni alumni1 = new Alumni("Filipe", 28);
-        // alumni1.setAssociatedClass(new1);
-        //System.out.println(alumni1.getAssociatedClass());
         app.init();
     }
 
@@ -51,6 +47,7 @@ public class App {
                     switch (schoolClassOperation) {
                         case 1:
                             System.out.println("Our Alumnis are: ");
+                            System.out.println(schoolClassToOperate.getAlumniList());
                             for (Alumni alumni : schoolClassToOperate.getAlumniList()) {
                                 System.out.println(alumni.getName());
                             }
@@ -101,9 +98,13 @@ public class App {
                 + name + " " + description + "\" \n");
     }
 
-    private static List<SchoolClass> getCsvClassesList() throws FileNotFoundException {
+    private List<SchoolClass> getCsvClassesList() throws FileNotFoundException {
         CsvHandler csvList = new CsvHandler();
         List<SchoolClass> allClassesList = csvList.getSchoolClasses();
+        System.out.println("Here are the classes:");
+        for (SchoolClass schoolClass : allClassesList) {
+            System.out.println(schoolClass.toString());
+        }
         return allClassesList;
     }
 

@@ -42,7 +42,7 @@ public class SchoolClass {
     }
     public void addAlumni(Alumni alumni) throws IOException {
         this.alumniList.add(alumni);
-        System.out.println("the alumni:" + alumni.getName() + " " + "is associated to the" + this.getName());
-        //CsvHandler.writeToAlumni(newAlumni);
+        //System.out.println("the alumni:" + alumni.getName() + " " + "is associated to the" + this.getName());
+        CsvHandler.writeToAlumni(alumni);
     }
 }
