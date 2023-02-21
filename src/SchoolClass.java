@@ -37,12 +37,14 @@ public class SchoolClass {
         this.description = description;
     }
 
+
     public ArrayList<Alumni> getAlumniList() {
         return this.alumniList;
     }
+
     public void addAlumni(Alumni alumni) throws IOException {
         this.alumniList.add(alumni);
         //System.out.println("the alumni:" + alumni.getName() + " " + "is associated to the" + this.getName());
-        CsvHandler.writeToAlumni(alumni);
+        //CsvHandler.writeToAlumni(alumni);
     }
 }

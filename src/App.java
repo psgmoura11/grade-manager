@@ -66,7 +66,14 @@ public class App {
                     }
                     break;
                 case "3":
-                    getCsvClassesList();
+                    SchoolClass turma1 = new SchoolClass("Shit","class");
+                    Alumni george = new Alumni("george", 29);
+                    Alumni joao = new Alumni("joao", 12);
+                    System.out.println(joao);
+                    turma1.addAlumni(george);
+                    turma1.addAlumni(joao);
+                    System.out.println(turma1.getAlumniList());
+                    // getAllClassesList();
                     break;
                 case "4":
                     System.out.println("Quiting \n");
@@ -101,13 +108,18 @@ public class App {
     private List<SchoolClass> getCsvClassesList() throws FileNotFoundException {
         CsvHandler csvList = new CsvHandler();
         List<SchoolClass> allClassesList = csvList.getSchoolClasses();
+        return allClassesList;
+    }
+
+    private List<SchoolClass> getAllClassesList() throws FileNotFoundException {
+        CsvHandler csvList = new CsvHandler();
+        List<SchoolClass> allClassesList = csvList.getSchoolClasses();
         System.out.println("Here are the classes:");
         for (SchoolClass schoolClass : allClassesList) {
             System.out.println(schoolClass.toString());
         }
         return allClassesList;
     }
-
     public void classManageMenu(SchoolClass schoolClass) {
         System.out.println("What do you want to do to class: " + schoolClass.getName() + "?");
         System.out.println("1. Show alumni");
